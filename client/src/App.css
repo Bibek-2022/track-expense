@@ -1,0 +1,16 @@
+.wrapper{
+    min-height: 75vh;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+   margin-top: 3rem;
+}
+.center form {
+    width: 400px;
+    background: rgba(0, 0, 0, 0.191);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
+}
