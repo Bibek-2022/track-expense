@@ -3,11 +3,12 @@ import Layout from "../../components/layout/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { postTransaction } from "../../helpers/axiosHelper";
+import { CustomTable } from "../../components/customTable/CustomTable";
 
 export const Dashboard = () => {
   const navigation = useNavigate();
   const [form, setForm] = useState({});
-  const [resp, setResp] = useState({});
+  const [resp, setResp] = useState({ status: "", message: "" });
   useEffect(() => {
     const storedUser = JSON.parse(window.sessionStorage.getItem("user"));
 
@@ -75,6 +76,9 @@ export const Dashboard = () => {
       </Form>
 
       <hr />
+      <Row>
+        <CustomTable />
+      </Row>
     </Layout>
   );
 };
