@@ -7,6 +7,7 @@ import { CustomTable } from "../../components/customTable/CustomTable";
 
 export const Dashboard = () => {
   const navigation = useNavigate();
+  const [recfetchFlage, setRecFetchFlage] = useState(0);
   const [form, setForm] = useState({ title: "", amount: "" });
   const [resp, setResp] = useState({ status: "", message: "" });
   useEffect(() => {
@@ -35,6 +36,9 @@ export const Dashboard = () => {
 
     setResp(result);
     setForm(info);
+    if (result.status === "success") {
+      setRecFetchFlage(recfetchFlage + 1);
+    }
   };
   return (
     <Layout>
@@ -85,7 +89,7 @@ export const Dashboard = () => {
 
       <hr />
       <Row>
-        <CustomTable form={form} />
+        <CustomTable key={recfetchFlage} />
       </Row>
     </Layout>
   );

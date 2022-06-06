@@ -13,3 +13,7 @@ export const findTransaction = (filter) => {
 export const findTransactions = (filter) => {
   return TransactionSchema.find(filter);
 };
+
+export const deleteTransactions = (ids) => {
+  return TransactionSchema.deleteMany({ _id: { $in: ids }, userId });
+};
