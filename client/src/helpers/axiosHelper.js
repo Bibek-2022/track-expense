@@ -44,3 +44,19 @@ export const postTransaction = async (transObj) => {
     };
   }
 };
+
+export const getTransaction = async (transObjs) => {
+  try {
+    const { data } = await axios.get(transactionEp, {
+      headers: {
+        Authorization: transObjs,
+      },
+    });
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};

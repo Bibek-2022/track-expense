@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button, Col, Form, Row } from "react-bootstrap";
-import { postTransaction } from "../../helpers/axiosHelper";
+import { postTransaction, getTransaction } from "../../helpers/axiosHelper";
 import { CustomTable } from "../../components/customTable/CustomTable";
 
 export const Dashboard = () => {
   const navigation = useNavigate();
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({ title: "", amount: "" });
   const [resp, setResp] = useState({ status: "", message: "" });
   useEffect(() => {
     const storedUser = JSON.parse(window.sessionStorage.getItem("user"));
@@ -24,9 +24,17 @@ export const Dashboard = () => {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const result = await postTransaction(form);
-    console.log(e);
+    const { _id } = JSON.parse(window.sessionStorage.getItem("user"));
+    if (!_id) {
+      return alert("Please login frist");
+    }
+
+    const info = { ...form, userId: _id };
+
+    const result = await postTransaction(info);
+
     setResp(result);
+    setForm(info);
   };
   return (
     <Layout>
@@ -77,7 +85,7 @@ export const Dashboard = () => {
 
       <hr />
       <Row>
-        <CustomTable />
+        <CustomTable form={form} />
       </Row>
     </Layout>
   );
