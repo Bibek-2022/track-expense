@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Button, Form } from "react-bootstrap";
+import { Alert, Button, Form, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import { createUser } from "../../helpers/axiosHelper";
@@ -9,7 +9,7 @@ export const Register = () => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
 
-  const something = useSelector((state) => state.regLogin);
+  const { response, isLoading } = useSelector((state) => state.regLogin);
   // const [response, setResponse] = useState({
   //   status: "",
   //   message: "",
@@ -46,6 +46,8 @@ export const Register = () => {
               {response.message}
             </Alert>
           )}
+
+          {isLoading && <Spinner animation="border" varient="primary" />}
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Name</Form.Label>
             <Form.Control
