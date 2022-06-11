@@ -21,4 +21,6 @@ const regLoginSLice = createSlice({
 
 const { reducer, actions } = regLoginSLice;
 
+export const { setIsLoading, setResponse } = actions;
+
 export default reducer;

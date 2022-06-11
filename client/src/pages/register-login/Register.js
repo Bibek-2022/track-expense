@@ -3,13 +3,17 @@ import { Alert, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import { createUser } from "../../helpers/axiosHelper";
-
+import { registerAction } from "./regLogin.action";
+import { useDispatch, useSelector } from "react-redux";
 export const Register = () => {
+  const dispatch = useDispatch();
   const [form, setForm] = useState({});
-  const [response, setResponse] = useState({
-    status: "",
-    message: "",
-  });
+
+  const something = useSelector((state) => state.regLogin);
+  // const [response, setResponse] = useState({
+  //   status: "",
+  //   message: "",
+  // });
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -20,11 +24,11 @@ export const Register = () => {
     });
   };
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
-
-    const result = await createUser(form);
-    setResponse(result);
+    // registerAction(form);
+    // registerAction(form);
+    dispatch(registerAction(form));
   };
 
   console.log(response);
