@@ -2,22 +2,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Button, FormCheck, Table } from "react-bootstrap";
 import { getTransaction } from "../../helpers/axiosHelper.js";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTransactionActions } from "../../pages/dashboard/dashboard.action.js";
 
 export const CustomTable = () => {
   const [data, setData] = useState([]);
   const [ids, setIds] = useState([]);
-  // const [res, setRes] = useState({ status: "", message: "" });
+  const [res, setRes] = useState({});
 
   useEffect(() => {
-    const { _id } = JSON.parse(window.sessionStorage.getItem("user"));
-
-    const fetchData = async () => {
-      const transInfo = await getTransaction(_id);
-      if (transInfo.status === "success") {
-        setData(transInfo.result);
-      }
-    };
-    fetchData();
+    useDispatch(fetchTransactionActions());
   }, []);
 
   const handelOnCheck = (e) => {
