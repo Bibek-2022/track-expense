@@ -20,10 +20,6 @@ export const CustomTable = () => {
     fetchData();
   }, []);
 
-  const incomeTotal = data.reduce((acc, item) => {
-    return data.type === "income" ? acc + acc.amount : acc - item.amount;
-  }, 0);
-
   const handelOnCheck = (e) => {
     const { checked, value } = e.target;
     if (checked) {
@@ -33,8 +29,11 @@ export const CustomTable = () => {
       setIds(filterIds);
     }
   };
+  const handelOnDelete = () => {};
+  const incomeTotal = data.reduce((acc, item) => {
+    return data.type === "income" ? acc + acc.amount : acc - item.amount;
+  }, 0);
 
-  const handelOnClick = async () => {};
   return (
     <div className="mt-5">
       <h1 className="text-center"> Transaction Found !!</h1>
@@ -87,7 +86,7 @@ export const CustomTable = () => {
         </tbody>
       </Table>
       {ids.length > 0 && (
-        <Button variant="danger" onClick={handelOnClick}>
+        <Button variant="danger" onClick={handelOnDelete}>
           Delete {ids.length} Selected Transaction
         </Button>
       )}
